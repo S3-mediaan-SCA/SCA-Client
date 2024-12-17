@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FaChartBar, FaHome, FaUser } from 'react-icons/fa';
 import ProfileHeader from '../components/ProfileHeader';
 import InvitePlayer from '../components/InvitePlayer';
 import MatchHistory from '../components/MatchHistory';
 import SpectateMatches from '../components/SpectateMatches';
+import Footer from '../components/Footer';
 
 const backendUrl = `${import.meta.env.VITE_BACKEND_URL}:${import.meta.env.VITE_BACKEND_PORT}`;
 
@@ -30,15 +30,15 @@ const Homepage: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
-      },
-    })
+        },
+      })
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch matches.");
-    }
+      if (!response.ok) {
+        throw new Error("Failed to fetch matches.");
+      }
 
-    const data = await response.json();
-    setLoggedInUser(data);
+      const data = await response.json();
+      setLoggedInUser(data);
     } catch (error) {
       console.log(error);
     }
@@ -67,8 +67,8 @@ const Homepage: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
-      },
-    })
+        },
+      })
 
       if (!response.ok) {
         throw new Error("Failed to fetch matches.");
@@ -101,28 +101,20 @@ const Homepage: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="w-80 bg-white rounded-lg shadow-md p-4 flex flex-col items-center relative">
+      <div className="h-5/6 w-5/6 bg-white rounded-lg shadow-md p-4 flex flex-col items-center relative">
         <div className="w-full -mt-10 mb-4">
-          <ProfileHeader className="drop-shadow-lg w-full max-w-sm" username={loggedInUser?.firstName} elo={1300} /> {/* Mijn naam moet geen hardcode zijn :( */}
+          <ProfileHeader className="drop-shadow-lg w-full max-w-sm" username={loggedInUser?.firstName} elo={1300} /> {/* ELO FIXEN */}
         </div>
 
-        <InvitePlayer
-          onInvite={handleInvite}
-        />
-        <SpectateMatches/>
-        <MatchHistory matches={userMatches} />
-
-        <div className="w-full bottom-0 flex justify-between pt-5">
-          <div className="text-gray-700 text-4xl">
-            <FaChartBar />
-          </div>
-          <div className="text-orange-500 text-4xl">
-            <FaHome />
-          </div>
-          <div className="text-gray-700 text-4xl">
-            <FaUser />
-          </div>
+        <div className="lg:flex lg:justify-around lg:items-start lg:w-full lg:space-x-4">
+          <SpectateMatches />
+          <InvitePlayer onInvite={handleInvite} />
+          <MatchHistory matches={userMatches} />
         </div>
+
+        <div className="w-full lg:w-1/4 mt-auto">
+        <Footer />
+      </div>
       </div>
     </div>
   );
