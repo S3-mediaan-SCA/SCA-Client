@@ -6,10 +6,16 @@ import { HubConnectionBuilder } from '@microsoft/signalr';
 const backendUrl = `${import.meta.env.VITE_BACKEND_URL}:${import.meta.env.VITE_BACKEND_PORT}`;
 
 interface Match {
-    playerFirstName: string,
-    opponentFirstName: string,
+    player1: Player,
+    player2: Player,
+    opponent1: Player,
+    opponent2: Player,
     playerScore: number,
     opponentScore: number,
+}
+
+interface Player {
+    firstName: string
 }
 
 const LiveMatchesList: React.FC = () => {
@@ -18,7 +24,7 @@ const LiveMatchesList: React.FC = () => {
     const [matches, setMatches] = useState<Match[]>([]);
 
     const openScoreboard = (match: Match) => {
-        const matchTitle = `${match.playerFirstName} - ${match.opponentFirstName}`;
+        const matchTitle = `${match.player1.firstName} - ${match.opponent1.firstName}`;
         const score = `${match.playerScore} - ${match.opponentScore}`;
         navigate('/scoreboard', { state: { matchTitle, score } });
     };
@@ -71,7 +77,7 @@ const LiveMatchesList: React.FC = () => {
                         className="text-red-500 inline-block mr-2"
                         size={14}
                     />
-                    {`${match.playerFirstName} - ${match.opponentFirstName}`}
+                    {`${match.player1.firstName} - ${match.opponent1.firstName}`}
                     <span className="block text-gray-400">{`${match.playerScore} - ${match.opponentScore}`}</span>
                 </div>
             ))}
