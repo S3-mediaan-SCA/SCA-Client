@@ -12,7 +12,7 @@ const backendUrl = `${import.meta.env.VITE_BACKEND_URL}:${import.meta.env.VITE_B
 const Homepage: React.FC = () => {
   const [users, setUsers] = useState([]);
   const [userMatches, setUserMatches] = useState([]);
-  const [loggedInUser, setLoggedInUser] = useState<{ firstName: string } | null>(null);
+  const [loggedInUser, setLoggedInUser] = useState<{ firstName: string, elo: number } | null>(null);
   const { matchId } = useParams<{ matchId: string }>();
 
   console.log(users);
@@ -104,7 +104,7 @@ const Homepage: React.FC = () => {
     <div className="flex justify-center items-center h-screen">
       <div className="h-5/6 w-5/6 bg-white rounded-lg shadow-md p-4 flex flex-col items-center relative">
         <div className="w-full -mt-10 mb-4">
-          <ProfileHeader className="drop-shadow-lg w-full max-w-sm" username={loggedInUser?.firstName} elo={1300} /> {/* ELO FIXEN */}
+          <ProfileHeader className="drop-shadow-lg w-full max-w-sm" username={loggedInUser?.firstName} elo={loggedInUser?.elo} />
         </div>
 
         <div className="lg:flex lg:justify-around lg:items-start lg:w-full lg:space-x-4">

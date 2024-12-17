@@ -58,7 +58,7 @@ const LiveMatchesList: React.FC = () => {
 
     return (
         <div className="live-matches-page">
-            <h1 className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-2 rounded-lg">
+            <h1 className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-2 rounded-lg mb-2">
                 Live Matches
             </h1>
             {matches.map((match, index) => (
