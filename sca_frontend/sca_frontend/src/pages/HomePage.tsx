@@ -5,6 +5,7 @@ import InvitePlayer from '../components/InvitePlayer';
 import MatchHistory from '../components/MatchHistory';
 import SpectateMatches from '../components/SpectateMatches';
 import Footer from '../components/Footer';
+import LiveMatchesList from '../components/LiveMatchList';
 
 const backendUrl = `${import.meta.env.VITE_BACKEND_URL}:${import.meta.env.VITE_BACKEND_PORT}`;
 
@@ -107,14 +108,27 @@ const Homepage: React.FC = () => {
         </div>
 
         <div className="lg:flex lg:justify-around lg:items-start lg:w-full lg:space-x-4">
-          <SpectateMatches />
-          <InvitePlayer onInvite={handleInvite} />
-          <MatchHistory matches={userMatches} />
+          <div className="lg:w-1/3 lg:mx-auto">
+            <h3 className="text-lg font-bold mb-2 mt-4 text-black">Spectate Matches</h3>
+            <div className="mb-2">
+              <LiveMatchesList />
+            </div>
+            <div className="">
+              <SpectateMatches />
+            </div>
+          </div>
+          <div className='lg:w-1/3 lg:mx-auto'>
+            <h3 className="text-lg font-bold mb-2 mt-4 text-black">Invite Player</h3>
+            <InvitePlayer onInvite={handleInvite} />
+          </div>
+          <div className='lg:w-1/3 lg:mx-auto'>
+            <h3 className="text-lg font-bold text-black mt-4 mb-2">Match History</h3>
+            <MatchHistory matches={userMatches} />
+          </div>
         </div>
-
         <div className="w-full lg:w-1/4 mt-auto">
-        <Footer />
-      </div>
+          <Footer />
+        </div>
       </div>
     </div>
   );
