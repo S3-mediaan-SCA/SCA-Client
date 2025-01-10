@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { IoMail } from "react-icons/io5";
+import { HubConnectionBuilder, HubConnection } from '@microsoft/signalr';
 
 const backendUrl = `${import.meta.env.VITE_BACKEND_URL}:${import.meta.env.VITE_BACKEND_PORT}`;
 
@@ -117,6 +118,33 @@ const InvitePlayer: React.FC<InvitePlayerProps> = ({ /*onInvite,*/ }) => {
 
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const connection = new HubConnectionBuilder()
+      .withUrl(`${backendUrl}/hub`) // Adjust hub endpoint for client communication
+      .withAutomaticReconnect()
+      .build();
+
+    connection
+      .start()
+      .then(() => {
+        console.log("Connected to SignalR");
+
+        // Listen for notifications or messages
+        connection.on("connected", (message: string) => {
+          console.info("New message:", message);
+          alert(`Invite Notification: ${message}`);
+        });
+      })
+      .catch((err) => console.error("SignalR Connection Error:", err));
+
+    // Cleanup on unmount
+    return () => {
+      if (connection) {
+        connection.stop();
+      }
+    };
   }, []);
 
   return (
