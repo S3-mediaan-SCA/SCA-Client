@@ -3,6 +3,8 @@ import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
 import { useNavigate } from "react-router-dom";
 import { useSignalRConnection } from "../SignalRContext";
 
+const backendUrl = `${import.meta.env.VITE_BACKEND_URL}:${import.meta.env.VITE_BACKEND_PORT}`;
+
 interface Invite {
     sender?: {
         name: string;
@@ -12,7 +14,6 @@ interface Invite {
 
 const WebSocketInviteManager: React.FC = () => {
     const connection = useSignalRConnection();
-    const backendUrl = `https://localhost:7035`;
     const [invite, setInvite] = useState<Invite | null>(null);
     // const [connection, setConnection] = useState<HubConnection | null>(null);
     const navigate = useNavigate();
