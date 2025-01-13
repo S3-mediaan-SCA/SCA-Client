@@ -6,6 +6,7 @@ import MatchHistory from '../components/MatchHistory';
 import SpectateMatches from '../components/SpectateMatches';
 import Footer from '../components/Footer';
 import LiveMatchesList from '../components/LiveMatchList';
+import WebSocketInviteManager from '../components/WebSocketInviteManager';
 
 const backendUrl = `${import.meta.env.VITE_BACKEND_URL}:${import.meta.env.VITE_BACKEND_PORT}`;
 
@@ -106,7 +107,6 @@ const Homepage: React.FC = () => {
         <div className="w-full -mt-10 mb-4">
           <ProfileHeader className="drop-shadow-lg w-full max-w-sm" username={loggedInUser?.firstName} elo={loggedInUser?.elo} />
         </div>
-
         <div className="lg:flex lg:justify-around lg:items-start lg:w-full lg:space-x-4">
           <div className="lg:w-1/3 lg:mx-auto">
             <h3 className="text-lg font-bold mb-2 mt-4 text-black">Spectate Matches</h3>
@@ -116,6 +116,7 @@ const Homepage: React.FC = () => {
             <div className="">
               <SpectateMatches />
             </div>
+        <WebSocketInviteManager/>
           </div>
           <div className='lg:w-1/3 lg:mx-auto'>
             <h3 className="text-lg font-bold mb-2 mt-4 text-black">Invite Player</h3>
