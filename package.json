@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/S3-mediaan-SCA/SCA-Client/issues"
   },
+  "publishConfig": {
+  "529200:registry": "https://npm.pkg.github.com"
+  },
   "homepage": "https://github.com/S3-mediaan-SCA/SCA-Client#readme"
 }
