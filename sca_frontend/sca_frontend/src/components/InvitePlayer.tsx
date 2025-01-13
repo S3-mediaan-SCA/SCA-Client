@@ -100,10 +100,23 @@ const InvitePlayer: React.FC<InvitePlayerProps> = ({ /*onInvite,*/ }) => {
   };
 
   const handleInvite = () => {
-    if (selectedUserId !== null) {
-      console.log(`Invited player with ID: ${selectedUserId}`);
-    } else {
-      console.error("No player selected to invite.");
+    const token = localStorage.getItem("token");
+    try {
+      const response = fetch(`https://localhost:7035/Match`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          opponent1Id: selectedUserId
+        })
+
+        
+        
+      });
+    } catch (error) {
+
     }
   };
 
